@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CONNECT 3 BLOCKS</string>
+    <string name="company_name">dalcoms studio</string>
+    <string name="action_settings">Setting</string>
+    <string name="admob_banner_id">ca-app-pub-0894410772194388/7240173500</string>
+    <string name="admob_interstitial_id">ca-app-pub-0894410772194388/4147106300</string>
+    
+    <string name="say_good_bye">Do you want to exit?</string>
+    <string name="advertize_myself">Do you want to see more Free App?</string>
+    <string name="ask_goto_menu">Do you want to go to Home menu?</string>
+    <string name="dlg_title_free_app">Free Apps.</string>
+    <string name="dlg_title_exit">EXIT</string>
+    <string name="share_subject">Connect 3 blocks</string>
+    <string name="share_text">[Free Game] Connect 3 blocks \n https://play.google.com/store/apps/details?id=dalcoms.pub.connect3blocks</string>
+    <string name="app_id">dalcoms.pub.connect3blocks</string>
+    
+    <string name="btn_title_play">Play</string>
+    <string name="btn_title_next">Next</string>
+    <string name="btn_title_retry">Retry</string>
+    <string name="btn_title_start">Start</string>
+    
+    <string name="text_score">SCORE</string>
+    <string name="text_bestscore">BEST</string>
+    
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
+    <string name="text_cancel">Cancel</string>
+    
+    <string name="finger_text">Touch and Fire</string>
+    
+    <string name="dlg_gotomenu_title">To Menu</string>
+    <string name="dlg_gotomenu_message">Do you want to go to Menu?</string>
+    
+    <string name="high_score">dalcoms.pub.connect3blocks.highScore</string>
+    
+
+</resources>

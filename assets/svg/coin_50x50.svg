@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50"
+   height="50"
+   id="svg7882"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="coin_50x50.svg">
+  <defs
+     id="defs7884" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.9195959"
+     inkscape:cx="25.646713"
+     inkscape:cy="28.886938"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7887">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-553.92852,-471.29075)">
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffbb45;fill-opacity:1;stroke:none"
+       id="path6912"
+       sodipodi:cx="-2912.9875"
+       sodipodi:cy="2875.3247"
+       sodipodi:rx="67.430267"
+       sodipodi:ry="67.430267"
+       d="m -2845.5573,2875.3247 a 67.430267,67.430267 0 1 1 -134.8605,0 67.430267,67.430267 0 1 1 134.8605,0 z"
+       transform="matrix(0.37075339,0,0,0.37075339,1658.9285,-569.74563)" />
+    <path
+       d="m -2845.5573,2875.3247 a 67.430267,67.430267 0 1 1 -134.8605,0 67.430267,67.430267 0 1 1 134.8605,0 z"
+       sodipodi:ry="67.430267"
+       sodipodi:rx="67.430267"
+       sodipodi:cy="2875.3247"
+       sodipodi:cx="-2912.9875"
+       id="path7695"
+       style="fill:#d69320;fill-opacity:1;stroke:none"
+       sodipodi:type="arc"
+       transform="matrix(0.28362771,0,0,0.28362771,1405.1325,-319.23103)" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3784"
+       style="font-size:30.71214485px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;text-anchor:end;fill:#a05a2c;fill-opacity:1;stroke:none;font-family:Ubuntu Mono;-inkscape-font-specification:Ubuntu Mono Bold"
+       d="m 576.80761,503.68233 c -1.54865,-0.10252 -2.79622,-0.27306 -3.74273,-0.51164 -0.94652,-0.23859 -1.6535,-0.45154 -2.12094,-0.63887 l 1.4012,-2.50706 c 0.78707,0.25602 1.7092,0.49057 2.7664,0.70365 1.05717,0.21309 2.17588,0.31963 3.35612,0.31962 1.37681,1e-5 2.33569,-0.12357 2.87668,-0.37075 0.54096,-0.24716 0.81145,-0.63508 0.81146,-1.16376 -10e-6,-0.30701 -0.10447,-0.57135 -0.31344,-0.79302 -0.20898,-0.22167 -0.51642,-0.42201 -0.92231,-0.60101 -0.40593,-0.179 -0.90395,-0.34096 -1.49406,-0.48588 -0.59012,-0.14491 -1.25396,-0.3113 -1.99151,-0.49915 -0.71279,-0.17015 -1.4134,-0.36606 -2.10179,-0.58774 -0.68842,-0.22166 -1.30311,-0.49029 -1.84407,-0.8059 -0.54099,-0.31558 -0.97748,-0.69921 -1.30949,-1.15089 -0.33201,-0.45165 -0.49802,-1.00999 -0.498,-1.67501 -2e-5,-0.47768 0.0923,-0.93819 0.27685,-1.38154 0.18458,-0.44333 0.47964,-0.85246 0.88518,-1.22738 0.40554,-0.3749 0.94031,-0.70312 1.60435,-0.98465 0.66401,-0.28149 1.47547,-0.499 2.43438,-0.65252 l 0,-2.48052 4.20359,0 0,2.35252 c 1.13145,0.0687 2.13349,0.18825 3.00611,0.35865 0.8726,0.17043 1.555,0.32381 2.04722,0.46012 l -1.03317,2.63429 c -0.71281,-0.20448 -1.55484,-0.38778 -2.5261,-0.54988 -0.97129,-0.16208 -1.97314,-0.24313 -3.00555,-0.24313 -1.18025,0 -1.9977,0.14492 -2.45239,0.43475 -0.45469,0.28985 -0.68203,0.63094 -0.68203,1.02327 0,0.27268 0.0799,0.49851 0.23973,0.6775 0.1598,0.17902 0.40553,0.33681 0.73717,0.47339 0.33164,0.13661 0.73099,0.26878 1.19806,0.39652 0.46706,0.12775 1.02023,0.26837 1.6595,0.42187 0.95887,0.25602 1.84406,0.52465 2.65552,0.8059 0.81145,0.28125 1.51224,0.60518 2.10237,0.97176 0.5901,0.3666 1.05116,0.79718 1.38319,1.29177 0.332,0.4946 0.498,1.07441 0.49802,1.73942 -2e-5,0.45999 -0.0985,0.91595 -0.29543,1.36788 -0.19698,0.45192 -0.5228,0.86977 -0.97748,1.25353 -0.45469,0.38376 -1.057,0.71626 -1.80692,0.99751 -0.74995,0.28125 -1.69027,0.48146 -2.82097,0.60062 l 0,2.73653 -4.20472,0 z" />
+    <g
+       id="g3831"
+       style="fill:#ffeeaa">
+      <g
+         transform="matrix(-0.70710678,-0.70710678,0.70710678,-0.70710678,637.33689,1256.6109)"
+         id="g3802"
+         style="fill:#ffeeaa">
+        <rect
+           ry="1.3258252"
+           y="472.18359"
+           x="577.49994"
+           height="3.8392854"
+           width="2.8571427"
+           id="rect3804"
+           style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic" />
+        <rect
+           style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic"
+           id="rect3806"
+           width="2.8571427"
+           height="3.8392854"
+           x="577.49994"
+           y="516.63031"
+           ry="1.3258252" />
+      </g>
+      <g
+         id="g3820"
+         style="fill:#ffeeaa">
+        <g
+           id="g3792"
+           transform="translate(1.9591e-6,-0.03586243)"
+           style="fill:#ffeeaa">
+          <rect
+             style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic"
+             id="rect3786"
+             width="2.8571427"
+             height="3.8392854"
+             x="577.49994"
+             y="472.18359"
+             ry="1.3258252" />
+          <rect
+             ry="1.3258252"
+             y="516.63031"
+             x="577.49994"
+             height="3.8392854"
+             width="2.8571427"
+             id="rect3790"
+             style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic" />
+        </g>
+        <g
+           transform="matrix(0,-1,1,0,82.601921,1075.2192)"
+           id="g3796"
+           style="fill:#ffeeaa">
+          <rect
+             ry="1.3258252"
+             y="472.18359"
+             x="577.49994"
+             height="3.8392854"
+             width="2.8571427"
+             id="rect3798"
+             style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic" />
+          <rect
+             style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic"
+             id="rect3800"
+             width="2.8571427"
+             height="3.8392854"
+             x="577.49994"
+             y="516.63031"
+             ry="1.3258252" />
+        </g>
+        <g
+           id="g3814"
+           transform="matrix(-0.70710678,0.70710678,-0.70710678,-0.70710678,1339.2487,437.88235)"
+           style="fill:#ffeeaa">
+          <rect
+             style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic"
+             id="rect3816"
+             width="2.8571427"
+             height="3.8392854"
+             x="577.49994"
+             y="472.18359"
+             ry="1.3258252" />
+          <rect
+             ry="1.3258252"
+             y="516.63031"
+             x="577.49994"
+             height="3.8392854"
+             width="2.8571427"
+             id="rect3818"
+             style="font-size:30.71214485000000100px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;text-anchor:end;fill:#ffeeaa;fill-opacity:1;stroke:none;font-family:Malgun Gothic;-inkscape-font-specification:Malgun Gothic" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

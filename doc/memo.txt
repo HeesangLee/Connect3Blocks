@@ -1,0 +1,8 @@
+Level 
+-.Description 
+   -. Two data classes are using to maintain things related to game level.
+   -. These two classes should be merged to JsonDataLevelData class at next project.
+-. GameLevel : User achieved level data
+-. JsonDataLevelData : level data
+
+ㅀㅁㅎㅀㄹ한글 글씨체는 왜이리 작은 거임

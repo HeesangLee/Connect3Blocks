@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="319.99997"
+   height="479.99997"
+   id="svg6884"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="market_share_star_btns_320x480.svg">
+  <defs
+     id="defs6886">
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter7077">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.3133005"
+         id="feGaussianBlur7079" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3879"
+       x="-0.144"
+       width="1.288"
+       y="-0.144"
+       height="1.288">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="4.9699507"
+         id="feGaussianBlur3881" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="146.29378"
+     inkscape:cy="266.77456"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3034" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata6889">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-488.57144,-380.93362)">
+    <rect
+       style="fill:none;stroke:none"
+       id="rect6830"
+       width="160"
+       height="160"
+       x="488.57144"
+       y="380.93362" />
+    <rect
+       y="540.93359"
+       x="488.57144"
+       height="160"
+       width="160"
+       id="rect6872"
+       style="fill:none;stroke:none" />
+    <rect
+       y="380.93362"
+       x="648.57141"
+       height="160"
+       width="160"
+       id="rect6876"
+       style="fill:none;stroke:none" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect6878"
+       width="160"
+       height="160"
+       x="648.57141"
+       y="540.93359" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect6880"
+       width="160"
+       height="160"
+       x="488.57144"
+       y="700.93359" />
+    <rect
+       y="700.93359"
+       x="648.57141"
+       height="160"
+       width="160"
+       id="rect6882"
+       style="fill:none;stroke:none" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\MatchColorGame\Image\1080x1776\icon_share.png"
+       sodipodi:type="arc"
+       style="fill:#41a85f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path6773"
+       sodipodi:cx="2049.5996"
+       sodipodi:cy="34.304371"
+       sodipodi:rx="41.416256"
+       sodipodi:ry="41.416256"
+       d="m 2091.0159,34.304371 c 0,22.873566 -18.5427,41.416256 -41.4163,41.416256 -22.8736,0 -41.4162,-18.54269 -41.4162,-41.416256 0,-22.873567 18.5426,-41.4162561 41.4162,-41.4162561 22.8736,0 41.4163,18.5426891 41.4163,41.4162561 z"
+       transform="matrix(-1.6549208,0,0,1.6549208,4120.4965,404.1626)" />
+    <path
+       style="fill:#ffffff;stroke:none;display:inline"
+       d="m 728.5719,425.5892 c -11.4421,0 -20.7987,8.9875 -21.3546,20.29 l -11.2951,0 0,50.3989 65.299,0 0,-50.3989 -11.3296,0 c -0.5533,-11.3025 -9.878,-20.29 -21.3197,-20.29 z m 0,5.7333 c 8.2587,0 15.0096,6.4358 15.5522,14.5567 l -31.1389,0 c 0.5455,-8.1209 7.3277,-14.5567 15.5867,-14.5567 z m -9.7159,28.9417 19.4315,10.8146 -19.4315,10.8143 0,-21.6289 z"
+       id="path6777"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\Nature Sound\Image\more_icon.png"
+       inkscape:export-xdpi="89.889999"
+       inkscape:export-ydpi="89.889999" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\MatchColorGame\Image\1080x1776\icon_share.png"
+       sodipodi:type="arc"
+       style="fill:#3d8eb9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path4659-5-4-7"
+       sodipodi:cx="2049.5996"
+       sodipodi:cy="34.304371"
+       sodipodi:rx="41.416256"
+       sodipodi:ry="41.416256"
+       d="m 2091.0159,34.304371 c 0,22.873566 -18.5427,41.416256 -41.4163,41.416256 -22.8736,0 -41.4162,-18.54269 -41.4162,-41.416256 0,-22.873567 18.5426,-41.4162561 41.4162,-41.4162561 22.8736,0 41.4163,18.5426891 41.4163,41.4162561 z"
+       transform="matrix(1.6549208,0,0,1.6549208,-2823.3536,564.1626)" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\MatchColorGame\Image\1080x1776\icon_share.png"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+       d="m 592.9977,583.4646 c -6.597,0 -11.9496,5.353 -11.9496,11.95 0,0.948 0.1283,1.876 0.336,2.76 l -28.9625,14.181 c -2.1481,-2.071 -5.0587,-3.36 -8.2782,-3.36 -6.597,0 -11.9497,5.353 -11.9497,11.95 0,6.597 5.3527,11.95 11.9497,11.95 3.2195,0 6.1301,-1.289 8.2782,-3.36 l 28.9625,14.181 c -0.207,0.882 -0.336,1.79 -0.336,2.736 0,6.597 5.3526,11.95 11.9496,11.95 6.5967,0 11.9495,-5.353 11.9495,-11.95 0,-6.597 -5.3528,-11.95 -11.9495,-11.95 -3.9938,0 -7.5254,1.981 -9.6942,4.991 l -28.2183,-13.797 c 0.6365,-1.46 0.9837,-3.056 0.9837,-4.751 0,-1.687 -0.3531,-3.296 -0.9837,-4.751 l 28.2183,-13.822 c 2.1677,3.02 5.6934,4.992 9.6942,4.992 6.5967,0 11.9495,-5.353 11.9495,-11.95 0,-6.597 -5.3528,-11.95 -11.9495,-11.95 z"
+       id="path4661-2-2-4"
+       inkscape:connector-curvature="0" />
+    <path
+       transform="matrix(1.6549208,0,0,1.6549208,-2823.3536,724.1626)"
+       d="m 2091.0159,34.304371 c 0,22.873566 -18.5427,41.416256 -41.4163,41.416256 -22.8736,0 -41.4162,-18.54269 -41.4162,-41.416256 0,-22.873567 18.5426,-41.4162561 41.4162,-41.4162561 22.8736,0 41.4163,18.5426891 41.4163,41.4162561 z"
+       sodipodi:ry="41.416256"
+       sodipodi:rx="41.416256"
+       sodipodi:cy="34.304371"
+       sodipodi:cx="2049.5996"
+       id="path4663-7-3-7"
+       style="fill:#553982;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       sodipodi:type="arc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+       inkscape:transform-center-x="1.0943359"
+       inkscape:transform-center-y="-0.16920316"
+       d="m 595.63492,809.66739 -24.39336,-8.36691 -21.45673,14.20799 1.78022,-23.79911 -21.07428,-13.79593 25.49373,-6.34173 8.43217,-22.73435 13.97581,19.8797 26.28551,-0.25468 -16.85638,18.62808 z"
+       id="path4665-6-1-7"
+       inkscape:connector-curvature="0" />
+    <path
+       transform="matrix(-1.6549208,0,0,1.6549208,4120.4964,564.1626)"
+       d="m 2091.0159,34.304371 c 0,22.873566 -18.5427,41.416256 -41.4163,41.416256 -22.8736,0 -41.4162,-18.54269 -41.4162,-41.416256 0,-22.873567 18.5426,-41.4162561 41.4162,-41.4162561 22.8736,0 41.4163,18.5426891 41.4163,41.4162561 z"
+       sodipodi:ry="41.416256"
+       sodipodi:rx="41.416256"
+       sodipodi:cy="34.304371"
+       sodipodi:cx="2049.5996"
+       id="path6779"
+       style="fill:#3d8eb9;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\MatchColorGame\Image\1080x1776\icon_share.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path6781"
+       d="m 752.9977,583.4646 c -6.597,0 -11.9496,5.353 -11.9496,11.95 0,0.948 0.1283,1.876 0.336,2.76 l -28.9625,14.181 c -2.1481,-2.071 -5.0587,-3.36 -8.2782,-3.36 -6.597,0 -11.9497,5.353 -11.9497,11.95 0,6.597 5.3527,11.95 11.9497,11.95 3.2195,0 6.1301,-1.289 8.2782,-3.36 l 28.9625,14.181 c -0.207,0.882 -0.336,1.79 -0.336,2.736 0,6.597 5.3526,11.95 11.9496,11.95 6.5967,0 11.9495,-5.353 11.9495,-11.95 0,-6.597 -5.3528,-11.95 -11.9495,-11.95 -3.9938,0 -7.5254,1.981 -9.6942,4.991 l -28.2183,-13.797 c 0.6365,-1.46 0.9837,-3.056 0.9837,-4.751 0,-1.687 -0.3531,-3.296 -0.9837,-4.751 l 28.2183,-13.822 c 2.1677,3.02 5.6934,4.992 9.6942,4.992 6.5967,0 11.9495,-5.353 11.9495,-11.95 0,-6.597 -5.3528,-11.95 -11.9495,-11.95 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+       inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\MatchColorGame\Image\1080x1776\icon_share.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#553982;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path6785"
+       sodipodi:cx="2049.5996"
+       sodipodi:cy="34.304371"
+       sodipodi:rx="41.416256"
+       sodipodi:ry="41.416256"
+       d="m 2091.0159,34.304371 c 0,22.873566 -18.5427,41.416256 -41.4163,41.416256 -22.8736,0 -41.4162,-18.54269 -41.4162,-41.416256 0,-22.873567 18.5426,-41.4162561 41.4162,-41.4162561 22.8736,0 41.4163,18.5426891 41.4163,41.4162561 z"
+       transform="matrix(-1.6549208,0,0,1.6549208,4120.4964,724.1626)" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none;display:inline"
+       inkscape:transform-center-x="-1.4234591"
+       inkscape:transform-center-y="0.095841841"
+       d="m 747.23562,815.94195 -21.21947,-14.65522 -24.50075,7.87217 8.15343,-22.42963 -16.5552,-18.98363 26.25869,0.793 14.26914,-19.60468 8.07537,22.91973 25.37389,6.86722 -21.26802,13.37215 z"
+       id="path6787"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g3874"
+       style="stroke:none">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\MatchColorGame\Image\1080x1776\icon_share.png"
+         sodipodi:type="arc"
+         style="fill:#41a85f;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path6587-3"
+         sodipodi:cx="2049.5996"
+         sodipodi:cy="34.304371"
+         sodipodi:rx="41.416256"
+         sodipodi:ry="41.416256"
+         d="m 2091.0159,34.304371 c 0,22.873566 -18.5427,41.416256 -41.4163,41.416256 -22.8736,0 -41.4162,-18.54269 -41.4162,-41.416256 0,-22.873567 18.5426,-41.4162561 41.4162,-41.4162561 22.8736,0 41.4163,18.5426891 41.4163,41.4162561 z"
+         transform="matrix(1.6549208,0,0,1.6549208,-2823.3537,404.1626)" />
+      <path
+         style="fill:#ffffff;stroke:none;display:inline"
+         d="m 568.5717,425.5892 c -11.4421,0 -20.7987,8.9875 -21.3546,20.29 l -11.2951,0 0,50.3989 65.299,0 0,-50.3989 -11.3296,0 c -0.5533,-11.3025 -9.878,-20.29 -21.3197,-20.29 z m 0,5.7333 c 8.2587,0 15.0096,6.4358 15.5522,14.5567 l -31.1389,0 c 0.5455,-8.1209 7.3277,-14.5567 15.5867,-14.5567 z m -9.7159,28.9417 19.4315,10.8146 -19.4315,10.8143 0,-21.6289 z"
+         id="path6762-4-9"
+         inkscape:connector-curvature="0"
+         inkscape:export-filename="C:\HeesangLee\Android\Dev\Dev_Data\Nature Sound\Image\more_icon.png"
+         inkscape:export-xdpi="89.889999"
+         inkscape:export-ydpi="89.889999" />
+      <path
+         style="fill:#000000;fill-opacity:0.40000001000000002;fill-rule:nonzero;stroke:none"
+         d="m 568.5496,392.4024 0,137.0624 c 37.8539,0 68.5625,-30.6773 68.5625,-68.5312 0,-37.8539 -30.7086,-68.5312 -68.5625,-68.5312 z"
+         id="path6591-1"
+         inkscape:connector-curvature="0" />
+    </g>
+    <path
+       style="fill:#000000;fill-opacity:0.40000001000000002;fill-rule:nonzero;stroke:none"
+       d="m 728.5932,392.4024 0,137.0624 c -37.8539,0 -68.5625,-30.6773 -68.5625,-68.5312 0,-37.8539 30.7086,-68.5312 68.5625,-68.5312 z"
+       id="path6775"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:0.40000001000000002;fill-rule:nonzero;stroke:none"
+       d="m 568.5491,552.4024 0,137.0624 c 37.8539,0 68.5625,-30.6773 68.5625,-68.5312 0,-37.8539 -30.7086,-68.5312 -68.5625,-68.5312 z"
+       id="path9665-3-2"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path9678-3-9"
+       d="m 568.5493,712.4024 0,137.0624 c 37.8539,0 68.5625,-30.6773 68.5625,-68.5312 0,-37.8539 -30.7086,-68.5312 -68.5625,-68.5312 z"
+       style="fill:#000000;fill-opacity:0.40000001000000002;fill-rule:nonzero;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path6783"
+       d="m 728.5937,552.4024 0,137.0624 c -37.8539,0 -68.5625,-30.6773 -68.5625,-68.5312 0,-37.8539 30.7086,-68.5312 68.5625,-68.5312 z"
+       style="fill:#000000;fill-opacity:0.40000001000000002;fill-rule:nonzero;stroke:none" />
+    <path
+       style="fill:#000000;fill-opacity:0.40000001000000002;fill-rule:nonzero;stroke:none"
+       d="m 728.5935,712.4024 0,137.0624 c -37.8539,0 -68.5625,-30.6773 -68.5625,-68.5312 0,-37.8539 30.7086,-68.5312 68.5625,-68.5312 z"
+       id="path6789"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
