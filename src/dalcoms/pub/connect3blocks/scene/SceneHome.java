@@ -85,6 +85,7 @@ public class SceneHome extends BaseScene {
 			@Override
 			public void run( ) {
 				attachSprites();
+				
 			}
 		} );
 	}
