@@ -20,6 +20,13 @@ public class AppColor {
 
 	public final Color APP_BACKGROUND = new Color( 247f / COLOR_8BIT, 247f / COLOR_8BIT, 247f / COLOR_8BIT,
 			1f );
+	public final Color BTN_BG = new Color( 231f / COLOR_8BIT, 231f / COLOR_8BIT, 231f / COLOR_8BIT,
+			1f );
+	public final Color COMPANY_TEXT_HOMESCENE = new Color( 87f / COLOR_8BIT, 87f / COLOR_8BIT, 87f / COLOR_8BIT,
+			1f );
+	public final Color GRAY_127 = new Color( 127f / COLOR_8BIT, 127f / COLOR_8BIT, 127f / COLOR_8BIT,
+			1f );
+	
 	public final Color WHITE = new Color( 1f, 1f, 1f, 1f );
 	public final Color BLACK = new Color( 0, 0, 0, 1f );
 	public final Color RED = new Color( 1f, 0f, 0f, 1f );
@@ -55,6 +62,8 @@ public class AppColor {
 			COLOR_8BIT / COLOR_8BIT );
 
 	public final Color RECT_LOADING = new Color( 44f / COLOR_8BIT, 62f / COLOR_8BIT, 80f / COLOR_8BIT,
+			COLOR_8BIT / COLOR_8BIT );
+	public final Color APP_THEME = new Color( 44f / COLOR_8BIT, 62f / COLOR_8BIT, 80f / COLOR_8BIT,
 			COLOR_8BIT / COLOR_8BIT );
 
 	public final Color ROUND_IMG_BG = new Color( 209f / COLOR_8BIT, 213f / COLOR_8BIT, 216f / COLOR_8BIT,

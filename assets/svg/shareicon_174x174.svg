@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="174"
+   height="174"
+   id="svg16133"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="New document 7">
+  <defs
+     id="defs16135" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="316.7308"
+     inkscape:cy="25.693876"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata16138">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-12.071428,-71.076469)">
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\HeesangLee\Desktop\test.png"
+       style="fill:none;stroke:none"
+       id="rect16974"
+       width="174"
+       height="174"
+       x="12.071428"
+       y="71.076469" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="C:\Users\HeesangLee\Desktop\test.png"
+       style="fill:#575757;fill-opacity:1;stroke:none;display:inline"
+       d="m 95.328132,123.65991 c -6.06,0 -10.976,4.917 -10.976,10.977 0,0.871 0.118,1.724 0.309,2.535 l -26.604,13.027 c -1.973,-1.903 -4.647,-3.086 -7.604,-3.086 -6.059,0 -10.976,4.915 -10.976,10.975 0,6.061 4.917,10.978 10.976,10.978 2.957,0 5.631,-1.184 7.604,-3.087 l 26.604,13.026 c -0.19,0.81 -0.309,1.644 -0.309,2.513 0,6.06 4.916,10.977 10.976,10.977 6.058998,0 10.975998,-4.917 10.975998,-10.977 0,-6.059 -4.917,-10.976 -10.975998,-10.976 -3.669,0 -6.912,1.819 -8.905,4.584 l -25.919,-12.673 c 0.584,-1.341 0.903,-2.807 0.903,-4.364 0,-1.549 -0.324,-3.027 -0.903,-4.364 l 25.919,-12.696 c 1.992,2.774 5.23,4.585 8.905,4.585 6.058998,0 10.975998,-4.917 10.975998,-10.976 0,-6.06 -4.917,-10.978 -10.975998,-10.978 z"
+       id="path16980"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

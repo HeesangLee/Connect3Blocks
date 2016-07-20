@@ -58,7 +58,7 @@ public class ResourcesManager {
 	private final Point sizeAtlasBilineaPremultiplyAlphar = new Point( 1280, 1968 );
 	// Regions
 	public ITextureRegion regionLoadingCircle;
-	public ITiledTextureRegion regionMarketShareStar;
+//	public ITiledTextureRegion regionMarketShareStar;
 	public ITextureRegion regionCicle38;
 	public ITextureRegion regionCicle80;
 	public ITextureRegion regionCicle150;
@@ -80,15 +80,22 @@ public class ResourcesManager {
 	public ITextureRegion regionCoin50;
 	public ITextureRegion regionArrowRight;
 	public ITextureRegion regionRoundLock;
-	
+	public ITextureRegion regionIconRight;
+	public ITextureRegion regionIconList;
+	public ITextureRegion regionIconMarket;
+	public ITextureRegion regionIconShare;
+	public ITextureRegion regionIconStar;
+
 	public ITiledTextureRegion regionSoundOnOff;
 
 	// Sound
 	private static final int FONT_SIZE_DEFAULT = 64;
-	private static final int FONT_SIZE_BUTTON = 48;
+	private static final int FONT_SIZE_BUTTON = 64;
+	private static final int FONT_SIZE_BUTTON_SMALL = 45;
 	private static final int FONT_SIZE_ROUNDMENU = 256;
 	private Font fontDefault;
 	private Font fontButton;
+	private Font fontButtonSmall;
 	private Font fontPoint;
 	private Font fontRoundMenu;
 
@@ -331,15 +338,23 @@ public class ResourcesManager {
 				this.atlasBilinear, this.activity, "arrowright_80x160.svg",
 				this.applyResizeFactor( 80 ), this.applyResizeFactor( 160 ) );
 
+		regionIconRight = SVGBitmapTextureAtlasTextureRegionFactory.createFromAsset(
+				this.atlasBilinear, this.activity, "iconright_43x58.svg",
+				this.applyResizeFactor( 43 ), this.applyResizeFactor( 58 ) );
+
 		regionTriangle = SVGBitmapTextureAtlasTextureRegionFactory.createFromAsset(
 				this.atlasBilinear, this.activity, "play_35x42.svg",
 				this.applyResizeFactor( 35 ), this.applyResizeFactor( 42 ) );
-		
-		regionMarketShareStar = SVGBitmapTextureAtlasTextureRegionFactory
+
+		regionSoundOnOff = SVGBitmapTextureAtlasTextureRegionFactory
 				.createTiledFromAsset( this.atlasBilinear, this.activity,
-						"soundonoff_160x180_1x2.svg",
+						"soundonoff_160x80_1x2.svg",
 						this.applyResizeFactor( 160 ),
-						this.applyResizeFactor( 180 ), 1, 2 );
+						this.applyResizeFactor( 80 ), 2, 1 );
+		
+		regionIconList = SVGBitmapTextureAtlasTextureRegionFactory.createFromAsset(
+				this.atlasBilinear, this.activity, "listicon_57x32.svg",
+				this.applyResizeFactor( 57 ), this.applyResizeFactor( 32 ) );
 
 		try {
 			atlasBilinear
@@ -365,11 +380,11 @@ public class ResourcesManager {
 						this.applyResizeFactor( 700 ),
 						this.applyResizeFactor( 700 ) );
 
-		regionMarketShareStar = SVGBitmapTextureAtlasTextureRegionFactory
-				.createTiledFromAsset( this.atlasNearest, this.activity,
-						"market_share_star_btns_320x480.svg",
-						this.applyResizeFactor( 320 ),
-						this.applyResizeFactor( 480 ), 2, 3 );
+//		regionMarketShareStar = SVGBitmapTextureAtlasTextureRegionFactory
+//				.createTiledFromAsset( this.atlasNearest, this.activity,
+//						"market_share_star_btns_320x480.svg",
+//						this.applyResizeFactor( 320 ),
+//						this.applyResizeFactor( 480 ), 2, 3 );
 
 		regionButtonBg = SVGBitmapTextureAtlasTextureRegionFactory
 				.createFromAsset( this.atlasNearest, this.activity,
@@ -402,6 +417,23 @@ public class ResourcesManager {
 						this.activity, "prickleV108x35.svg",
 						this.applyResizeFactor( 108 ),
 						this.applyResizeFactor( 35 ) );
+		
+		regionIconMarket = SVGBitmapTextureAtlasTextureRegionFactory
+				.createFromAsset( this.atlasNearest,
+						this.activity, "marketicon_174x174.svg",
+						this.applyResizeFactor( 174 ),
+						this.applyResizeFactor( 174 ) );
+		regionIconShare = SVGBitmapTextureAtlasTextureRegionFactory
+				.createFromAsset( this.atlasNearest,
+						this.activity, "shareicon_174x174.svg",
+						this.applyResizeFactor( 174 ),
+						this.applyResizeFactor( 174 ) );
+		regionIconStar = SVGBitmapTextureAtlasTextureRegionFactory
+				.createFromAsset( this.atlasNearest,
+						this.activity, "staricon_174x174.svg",
+						this.applyResizeFactor( 174 ),
+						this.applyResizeFactor( 174 ) );
+		
 
 		try {
 			atlasNearest
@@ -423,6 +455,11 @@ public class ResourcesManager {
 				( int ) applyResizeFactor( 512f ), TextureOptions.BILINEAR );
 
 		final ITexture tFontTextureButton = new BitmapTextureAtlas(
+				activity.getTextureManager(),
+				( int ) applyResizeFactor( camera.getWidth() ),
+				( int ) applyResizeFactor( 512f ), TextureOptions.BILINEAR );
+		
+		final ITexture tFontTextureButtonSmall = new BitmapTextureAtlas(
 				activity.getTextureManager(),
 				( int ) applyResizeFactor( camera.getWidth() ),
 				( int ) applyResizeFactor( 512f ), TextureOptions.BILINEAR );
@@ -455,6 +492,12 @@ public class ResourcesManager {
 				activity.getAssets(), "UbuntuB.ttf", FONT_SIZE_ROUNDMENU, true,
 				AppColor.getInstance().BALL.getABGRPackedInt() );
 		this.fontRoundMenu.load();
+		
+		this.fontButtonSmall = FontFactory.createFromAsset(
+				activity.getFontManager(), tFontTextureButtonSmall,
+				activity.getAssets(), "UbuntuB.ttf", FONT_SIZE_BUTTON_SMALL, true,
+				AppColor.getInstance().WHITE.getABGRPackedInt() );
+		this.fontButtonSmall.load();
 
 	}
 
@@ -464,6 +507,9 @@ public class ResourcesManager {
 
 	public Font getFontButton( ) {
 		return this.fontButton;
+	}
+	public Font getFontButtonSmall( ) {
+		return this.fontButtonSmall;
 	}
 
 	public Font getFontPoint( ) {

@@ -1,13 +1,16 @@
 package dalcoms.pub.connect3blocks.scene;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import lib.dalcoms.andengineheesanglib.buttons.TiledSpriteOnRectangleToggleButton;
 import lib.dalcoms.andengineheesanglib.utils.HsMath;
+import lib.dalcoms.andengineheesanglib.utils.HsUtils;
 
 import org.andengine.engine.Engine;
 import org.andengine.engine.camera.Camera;
 import org.andengine.entity.modifier.LoopEntityModifier;
-import org.andengine.entity.modifier.MoveXModifier;
+import org.andengine.entity.modifier.RotationModifier;
 import org.andengine.entity.modifier.ScaleModifier;
 import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.primitive.Rectangle;
@@ -17,32 +20,34 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.util.color.Color;
 import org.andengine.util.modifier.ease.EaseBackOut;
 import org.andengine.util.modifier.ease.EaseCircularIn;
+import org.andengine.util.modifier.ease.IEaseFunction;
 
-import android.annotation.SuppressLint;
+import com.google.android.gms.playlog.internal.LogEvent;
+
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
-import android.content.Context;
+import android.content.Entity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.NotificationCompat;
-import android.support.v7.app.NotificationCompat.Builder;
 import android.util.Log;
 import dalcoms.pub.connect3blocks.GoMarketSharStarAnimatedSprite;
 import dalcoms.pub.connect3blocks.Gotype;
 import dalcoms.pub.connect3blocks.R;
+import dalcoms.pub.connect3blocks.RectangleButton;
+import dalcoms.pub.connect3blocks.RectangleLevelButton;
+import dalcoms.pub.connect3blocks.RectangleLevelButton.EnumRectLevelBtnProfile;
+import dalcoms.pub.connect3blocks.RectangleLevelButton.EnumSelPage;
 import dalcoms.pub.connect3blocks.ResourcesManager;
 
 public class SceneHome extends BaseScene {
 	final String TAG = this.getClass().getSimpleName();
+	final static boolean LOG_EN = true;
 
 	HsMath hsMath = new HsMath();
 
 	boolean flag_interstitialAdOn = false;
-	//	ArrayList<LevelViewButton> mLevelViewButtons = new ArrayList<LevelViewButton>();
 
 	Rectangle mRoundImgBgRect;
 	Text mTextRoundKind;
@@ -51,13 +56,23 @@ public class SceneHome extends BaseScene {
 	Sprite mSpriteArrowRight;
 	Sprite mSpriteArrowLeft;
 	Sprite mSpriteLockSymbol;
+	TiledSpriteOnRectangleToggleButton mSpriteSoundOnOff;
 
-	private int mFocusedRound = 0; //Kind of Round -Default round=0, Custom Round=1, Download Round=2
-	private int mFocusedRoundNum = 0;
+	private int mFocusedRoundNum;
 	private int mDefaultRoundCount;
 
-	private int mPreTouchOfRound;
+	final int ROUND_DP_SIZE_X = 6;
+	final int ROUND_DP_SIZE_Y = 4;
+
+	final float BUTTON_HEIGHT = resourcesManager.applyResizeFactor( 174f );
+	final float ROUNDBTN_POS_Y = resourcesManager.applyResizeFactor( 368.316f );
+	final float BUTTON_GAP = resourcesManager.applyResizeFactor( 5f );
+
+	ArrayList<RectangleLevelButton> mRoundBtnArray;
+
 	private final float mCameraWidth = camera.getWidth();
+
+	private RoundPageInfo mRoundPageInfo;
 
 	@Override
 	public void createScene( ) {
@@ -77,6 +92,8 @@ public class SceneHome extends BaseScene {
 	private void initScene( ) {
 		setFocusedRoundNum( getLastRoundNum() );
 		mDefaultRoundCount = sceneManager.getDefaultRounFileNames().size();
+
+		mRoundPageInfo = new RoundPageInfo( ROUND_DP_SIZE_X, ROUND_DP_SIZE_Y, getDefaultRoundCount() );
 	}
 
 	private int getDefaultRoundCount( ) {
@@ -85,278 +102,199 @@ public class SceneHome extends BaseScene {
 
 	@Override
 	public void attachSprites( ) {
-//		this.attachMarketShareStarAnimatedSprites();
-		this.attachTitileText();
-//		this.attachCompanyText();
-//		this.attachRoundImgBgRect();
-//		this.attachRoundNumberPointText();
+		attachTitileText();
+		attachSoundOnOffButton();
+		attachBackgoundOfButtons();
+		attachRoundButtons();
+		attachCompanyText();
+		attachLevelText();
+		attachPlayButton();
+		attachMarketShareStarButtons();
 	}
 
 	private int getLastRoundNum( ) {
+		HsUtils.logV( LOG_EN, "lastRoundNum",
+				"lastRoundNum=" + String.valueOf( sceneManager.getLastRoundInfoIndex() ) );
 		return sceneManager.getLastRoundInfoIndex();
 	}
 
 	private int getFocusedRoundNum( ) {
+		HsUtils.logV( LOG_EN, "focusedRoundNum",
+				"focusedRoundNum=" + String.valueOf( this.mFocusedRoundNum ) );
 		return this.mFocusedRoundNum;
 	}
 
 	private int setFocusedRoundNum( int pRoundNum ) {
-		this.mFocusedRoundNum = pRoundNum;
+		this.mFocusedRoundNum = pRoundNum > 0 ? pRoundNum : 1;
 		return this.mFocusedRoundNum;
 	}
 
-	private void setFocusedRoundNumShift( int pShiftNum ) {
-		int pRoundNum = getFocusedRoundNum() + pShiftNum;
-		Log.v( "roundNum", String.valueOf( pRoundNum ) );
-		if ( ( pRoundNum > -1 ) && ( pRoundNum < getDefaultRoundCount() ) ) {
-			setRoundString( setFocusedRoundNum( pRoundNum ), true );
-			if ( pRoundNum == 0 ) {
-				mSpriteArrowLeft.setVisible( false );
-			} else {
-				mSpriteArrowLeft.setVisible( true );
-			}
+	private void attachBackgoundOfButtons( ) {
+		final float pHeight = ( this.ROUND_DP_SIZE_Y + 2 ) * this.BUTTON_HEIGHT
+				+ ( this.ROUND_DP_SIZE_Y + 2 + 1 ) * this.BUTTON_GAP;
+		Rectangle bg = new Rectangle( 0f, this.ROUNDBTN_POS_Y - BUTTON_GAP, this.mCameraWidth, pHeight, vbom );
+		bg.setColor( appColor.BTN_BG );
+		attachChild( bg );
+	}
 
-			if ( sceneManager.getRoundInfoMap().containsKey( pRoundNum ) ) {
-				setRoundPointText( sceneManager.getRoundInfoMap().get( getFocusedRoundNum() ).getPoint(),
-						true );
-				if ( sceneManager.getRoundInfoMap().get( pRoundNum ).isUnLock() ) {
-					mSpriteArrowRight.setVisible( true );
-					if ( mSpriteLockSymbol != null ) {
-						mSpriteLockSymbol.setVisible( false );
+	private void attachRoundButtons( ) {
+		this.mRoundBtnArray = new ArrayList<RectangleLevelButton>();
+		float pX = 0;
+		float pY = 0;
+
+		for ( int y = 0 ; y < this.ROUND_DP_SIZE_Y ; y++ ) {
+			for ( int x = 0 ; x < this.ROUND_DP_SIZE_X ; x++ ) {
+				pX = ( x + 1 ) * this.BUTTON_GAP + x * this.BUTTON_HEIGHT;
+				pY = this.ROUNDBTN_POS_Y + y * ( this.BUTTON_GAP + this.BUTTON_HEIGHT );
+				RectangleLevelButton temp = new RectangleLevelButton( pX, pY, this.BUTTON_HEIGHT,
+						this.BUTTON_HEIGHT, vbom,
+						resourcesManager.getFontButton(), resourcesManager.regionIconRight ) {
+					@Override
+					public void onLevelViewOnlyButtonClick( ) {
 					}
-				} else {//lock
-					mSpriteArrowRight.setVisible( false );
-					if ( mSpriteLockSymbol != null ) {
-						mSpriteLockSymbol.setVisible( true );
+
+					@Override
+					public void onLevelViewSelButtonClick( ) {
+						//just select and focus
+						//setFocuseRoundNum --> UpdateFocus of all round buttons.
+						focusSelectedButton( this );
 					}
-				}
+
+					@Override
+					public void onSelPageNextButtonClick( ) {
+						setFocusedRoundNum( mRoundPageInfo.getRoundPage( getFocusedRoundNum() )
+								.getLastRound() + 1 );
+						setRoundButtons( getFocusedRoundNum() );
+						effectRoundButtons( -1, 45f );
+					}
+
+					@Override
+					public void onSelPagePreButtonClick( ) {
+						setFocusedRoundNum( mRoundPageInfo.getRoundPage( getFocusedRoundNum() )
+								.getFirstRound() - 1 );
+						setRoundButtons( getFocusedRoundNum() );
+						effectRoundButtons( -1, -45f );
+					}
+
+				};
+				attachChild( temp );
+				registerTouchArea( temp );
+				this.mRoundBtnArray.add( temp );
+			}
+		}
+
+		setRoundButtons( getFocusedRoundNum() );
+
+	}
+
+	private void focusSelectedButton( RectangleLevelButton pRoundBtn ) {
+		if ( !pRoundBtn.isFocused() ) {
+			setFocusedRoundNum( pRoundBtn.getLevelNum() );
+			getFocusedRoundNum();
+			for ( RectangleLevelButton roundBtn : this.mRoundBtnArray ) {
+				roundBtn.setFocuse( roundBtn.equals( pRoundBtn ) );
+			}
+		}
+	}
+
+	private void setRoundButtons( int pFocusedRoundNum ) {
+		RoundPage roundPage = this.mRoundPageInfo.getRoundPage( pFocusedRoundNum );
+
+		int roundNum = roundPage.getFirstRound();
+		int startIndex = 0;
+		int endIndex = this.ROUND_DP_SIZE_X * this.ROUND_DP_SIZE_Y;
+
+		if ( roundPage.hasPrePage ) {
+			this.mRoundBtnArray.get( 0 ).setButtonProfile( EnumRectLevelBtnProfile.RECTBTN_SELPAGE )
+					.setSelPage( EnumSelPage.PREVIEW );
+
+			startIndex = 1;
+		}
+		if ( roundPage.hasNextPage ) {
+			this.mRoundBtnArray.get( --endIndex ).setButtonProfile( EnumRectLevelBtnProfile.RECTBTN_SELPAGE )
+					.setSelPage( EnumSelPage.NEXT );
+		}
+
+		for ( int i = startIndex ; i < endIndex ; i++ ) {
+			if ( roundNum <= roundPage.getLastRound() ) {
+				this.mRoundBtnArray.get( i ).setButtonProfile( EnumRectLevelBtnProfile.RECTBTN_LEVELVIEW_SEL );
+				this.mRoundBtnArray.get( i ).setLevelNum( roundNum );
+
+				this.mRoundBtnArray.get( i ).setFocuse( roundNum == getFocusedRoundNum() );
+				roundNum++;
+
 			} else {
-				setRoundPointText( "NO", true );
-				mSpriteArrowRight.setVisible( false );
-				if ( mSpriteLockSymbol != null ) {
-					mSpriteLockSymbol.setVisible( true );
-					shakeUnLockSymbol();
-				}
+				this.mRoundBtnArray.get( i ).setButtonProfile( EnumRectLevelBtnProfile.RECTBTN_BLANK );
 			}
+
 		}
 	}
 
-	private void shakeUnLockSymbol( ) {
-		final float pDuration = 0.07f;
-		final float pX = hsMath.getAlignCenterFloat( resourcesManager.regionRoundLock.getWidth(),
-				this.mCameraWidth );
-		final float pMoveX = resourcesManager.applyResizeFactor( 70f );
-		this.mSpriteLockSymbol.registerEntityModifier( new SequenceEntityModifier(
-				new MoveXModifier( pDuration, pX, pX + pMoveX ),
-				new MoveXModifier( pDuration * 2f, pX + pMoveX, pX - pMoveX ),
-				new MoveXModifier( pDuration, pX - pMoveX, pX ) ) );
+	/**
+	 * 
+	 * @param btnIndex
+	 *            : -1=all, else = index of mRoundBtnArray
+	 */
+	private void effectRoundButtons( int btnIndex ) {
+		effectRoundButtons( btnIndex, 45f );
 	}
 
-	private void attachRoundNumberPointText( ) {
-		final float pWidth = camera.getWidth();
-		final float pHeight = resourcesManager.applyResizeFactor( 117.439f );
-		Rectangle bgRectRoundNum = new Rectangle( 0f, this.mRoundImgBgRect.getY() - pHeight, pWidth, pHeight,
-				vbom );
-		bgRectRoundNum.setColor( appColor.ROUND_NUMPOINT );
-
-		Rectangle bgRectRoundPoint = new Rectangle( 0f, this.mRoundImgBgRect.getY()
-				+ this.mRoundImgBgRect.getHeight(), pWidth,
-				pHeight, vbom );
-		bgRectRoundPoint.setColor( appColor.ROUND_NUMPOINT );
-
-		attachChild( bgRectRoundNum );
-		attachChild( bgRectRoundPoint );
-
-		mTextRoundKind = new Text( 0, 0, resourcesManager.getFontButton(), "  ROUND  ", vbom );
-		mTextRoundPoint = new Text( 0, 0, resourcesManager.getFontButton(), "   NO POINT   ", vbom );
-		bgRectRoundNum.attachChild( mTextRoundKind );
-		bgRectRoundPoint.attachChild( mTextRoundPoint );
-
-		final float pXRoundNum = hsMath.getAlignCenterFloat( mTextRoundKind.getWidth(), camera.getWidth() );
-		final float pYRoundNum = hsMath.getAlignCenterFloat( mTextRoundKind.getHeight(),
-				bgRectRoundNum.getHeight() );
-
-		final float pXRoundPoint = hsMath.getAlignCenterFloat( mTextRoundPoint.getWidth(), camera.getWidth() );
-		final float pYRoundPoint = hsMath.getAlignCenterFloat( mTextRoundPoint.getHeight(),
-				bgRectRoundPoint.getHeight() );
-
-		mTextRoundKind.setPosition( pXRoundNum, pYRoundNum );
-		mTextRoundPoint.setPosition( pXRoundPoint, pYRoundPoint );
-
-		if ( sceneManager.getRoundInfoMap().containsKey( getFocusedRoundNum() ) ) {
-			setRoundPointText( sceneManager.getRoundInfoMap().get( getFocusedRoundNum() ).getPoint(),
-					true );
-		}
-	}
-
-	private void setRoundPointText( int pRoundPoint, boolean pNewTextEffect ) {
-		if ( mTextRoundPoint != null ) {
-			mTextRoundPoint.setText( String.valueOf( pRoundPoint ) + " POINT" );
-
-			final float pXRoundPoint = hsMath.getAlignCenterFloat( mTextRoundPoint.getWidth(),
-					camera.getWidth() );
-			mTextRoundPoint.setPosition( pXRoundPoint, mTextRoundPoint.getY() );
-
-			if ( pNewTextEffect == true ) {
-				mTextRoundPoint.registerEntityModifier( new ScaleModifier( 0.3f, 0.05f, 1f ) );
+	private void effectRoundButtons( int btnIndex, float rotateToAngle ) {
+		final float duration = 0.2f;
+		if ( btnIndex < 0 ) {//all
+			for ( RectangleLevelButton roundbtn : this.mRoundBtnArray ) {
+				roundbtn.registerEntityModifier(
+						new SequenceEntityModifier(
+								new RotationModifier( duration, 0, rotateToAngle, EaseCircularIn
+										.getInstance() ),
+								new RotationModifier( duration, rotateToAngle, 0, EaseCircularIn
+										.getInstance() ) ) );
 			}
+		} else {//index
+			this.mRoundBtnArray.get( btnIndex )
+					.registerEntityModifier(
+							new SequenceEntityModifier(
+									new RotationModifier( duration, 0, rotateToAngle, EaseCircularIn
+											.getInstance() ),
+									new RotationModifier( duration, rotateToAngle, 0, EaseCircularIn
+											.getInstance() ) ) );
 		}
 	}
 
-	private void setRoundPointText( String pRoundPoint, boolean pNewTextEffect ) {
-		if ( mTextRoundPoint != null ) {
-			mTextRoundPoint.setText( pRoundPoint + " POINT" );
-
-			final float pXRoundPoint = hsMath.getAlignCenterFloat( mTextRoundPoint.getWidth(),
-					camera.getWidth() );
-			mTextRoundPoint.setPosition( pXRoundPoint, mTextRoundPoint.getY() );
-
-			if ( pNewTextEffect == true ) {
-				mTextRoundPoint.registerEntityModifier( new ScaleModifier( 0.3f, 0.05f, 1f ) );
-			}
-		}
+	private void attachPlayButton( ) {
+		RectangleLevelButton lastRoundBtn = this.mRoundBtnArray.get( this.mRoundBtnArray.size() - 1 );
+		final float pY = lastRoundBtn.getY() + lastRoundBtn.getHeight() + this.BUTTON_GAP;
+		RectangleButton pPlayButton = new RectangleButton( this.BUTTON_GAP, pY, this.mCameraWidth
+				- this.BUTTON_GAP * 2, this.BUTTON_HEIGHT, vbom, resourcesManager.getFontButton(),
+				"PLAY" );
+		pPlayButton.setColor( appColor.APP_THEME );
+		pPlayButton.setTextColor( appColor.WHITE );
+		attachChild( pPlayButton );
+		registerTouchArea( pPlayButton );
 	}
 
-	private void attachLeftRightArrow( ) {
-		final float pXLeft = resourcesManager.applyResizeFactor( 28f );
-		final float pXright = mCameraWidth - ( pXLeft + resourcesManager.regionArrowRight.getWidth() );
+	private void attachSoundOnOffButton( ) {
+		final float pWidth = resourcesManager.applyResizeFactor( 174f );
+		final float pHeight = pWidth;
+		final float pX = camera.getWidth() - pWidth;
+		final float pY = 0f;
+		//Read sound On/Off state configuration from SharedPreference Before creating Sound OnOff toggle button.
+		//Default = Sound ON , false = on, true = off;
+		boolean pButtonStatus = false;
 
-		final float pY = ( this.mRoundImgBgRect.getHeight() - resourcesManager.regionArrowRight.getHeight() )
-				/ 2f + this.mRoundImgBgRect.getY();
-		this.mSpriteArrowLeft = new Sprite( pXLeft, pY, resourcesManager.regionArrowRight, vbom );
-		this.mSpriteArrowLeft.setFlippedHorizontal( true );
-		this.mSpriteArrowRight = new Sprite( pXright, pY, resourcesManager.regionArrowRight, vbom );
-
-		attachChild( mSpriteArrowLeft );
-		attachChild( mSpriteArrowRight );
-	}
-
-	private void attachLockSymbol( ) {
-		final float pX = hsMath.getAlignCenterFloat( resourcesManager.regionRoundLock.getWidth(),
-				this.mCameraWidth );
-		final float pY = hsMath.getAlignCenterFloat( resourcesManager.regionRoundLock.getHeight(),
-				mRoundImgBgRect.getHeight() ) + this.mRoundImgBgRect.getY();
-
-		this.mSpriteLockSymbol = new Sprite( pX, pY, resourcesManager.regionRoundLock, vbom );
-
-		attachChild( mSpriteLockSymbol );
-		mSpriteLockSymbol.setVisible( false );
-	}
-
-	private int getPositionOfRound( float pTouchAreaLocalX ) {//-1:left, 0:center, 1:right
-		int result = 0;
-
-		if ( pTouchAreaLocalX < this.mCameraWidth * 0.2f ) {
-			result = -1;
-		} else if ( pTouchAreaLocalX > this.mCameraWidth * 0.8f ) {
-			result = 1;
-		}
-
-		return result;
-	}
-
-	private void attachRoundImgBgRect( ) {
-		final float pWidth = mCameraWidth;
-		final float pHeight = resourcesManager.applyResizeFactor( 408f );
-		this.mRoundImgBgRect = new Rectangle( 0, 0, pWidth, pHeight, vbom ) {
+		mSpriteSoundOnOff = new TiledSpriteOnRectangleToggleButton( pX, pY,
+				pWidth, pHeight, vbom,
+				resourcesManager.regionSoundOnOff, pButtonStatus ) {
 			@Override
-			public boolean onAreaTouched( TouchEvent pSceneTouchEvent, float pTouchAreaLocalX,
-					float pTouchAreaLocalY ) {
-				if ( pSceneTouchEvent.isActionDown() ) {
-
-					mPreTouchOfRound = getPositionOfRound( pTouchAreaLocalX );
-
-					if ( mPreTouchOfRound == -1 ) {
-						if ( mSpriteArrowLeft.isVisible() ) {
-							resourcesManager.getVibrator().vibrate( 30 );
-							setFocusedRoundNumShift( -1 );
-							mSpriteArrowLeft.registerEntityModifier( new SequenceEntityModifier(
-									new ScaleModifier( 0.15f, 1f, 1.5f ),
-									new ScaleModifier( 0.15f, 1.5f, 1f ) ) );
-						}
-					} else if ( mPreTouchOfRound == 1 ) {
-						if ( mSpriteArrowRight.isVisible() ) {
-							resourcesManager.getVibrator().vibrate( 30 );
-							setFocusedRoundNumShift( 1 );
-							mSpriteArrowRight.registerEntityModifier( new SequenceEntityModifier(
-									new ScaleModifier( 0.15f, 1f, 1.5f ),
-									new ScaleModifier( 0.15f, 1.5f, 1f ) ) );
-						}
-					} else {//Center
-						resourcesManager.getVibrator().vibrate( 40 );
-						if ( mSpriteLockSymbol.isVisible() ) {
-							shakeUnLockSymbol();
-						}
-					}
-				} else {
-					if ( pSceneTouchEvent.isActionUp() ) {
-						mSpriteArrowLeft.setScale( 1f );
-						mSpriteArrowRight.setScale( 1f );
-						if ( mPreTouchOfRound == getPositionOfRound( pTouchAreaLocalX ) ) {
-							//							Log.v( "touch", String.valueOf( getPositionOfRound( pTouchAreaLocalX ) ) );
-							if ( mPreTouchOfRound == 0 ) {//center....round selected---goto game through replay scene.....
-								if ( !mSpriteLockSymbol.isVisible() ) {
-									sceneManager.createSceneIntermission( getFocusedRoundNum() );
-								}
-							}
-						}
-					}
-
-				}
-				return super.onAreaTouched( pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY );
+			public void onButtonToggled( ) {
+				super.onButtonToggled();
+				//				Log.v( "homeSoundOnOff", String.valueOf( getButtonStatus() ) );
 			}
 		};
-		final float pX = 0f;
-		final float pY = hsMath.getAlignCenterFloat( mRoundImgBgRect.getHeight(), camera.getHeight() );
+		mSpriteSoundOnOff.setEffectColor( new Color( 44f / 255f, 62f / 255f, 80f / 255f, 128f / 255f ) );
 
-		String roundTextStr = "999";
-
-		mRoundImgBgRect.setPosition( pX, pY );
-		mRoundImgBgRect.setColor( appColor.ROUND_IMG_BG );
-		attachChild( mRoundImgBgRect );
-		//		registerTouchArea( mRoundImgBgRect );
-
-		mTextRoundNum = new Text( 0, 0, resourcesManager.getFontRoundMenu(), roundTextStr, vbom );
-		mRoundImgBgRect.attachChild( mTextRoundNum );
-		final float pTextY = hsMath.getAlignCenterFloat( mTextRoundNum.getHeight(),
-				mRoundImgBgRect.getHeight() );
-		mTextRoundNum.setPosition( 0, pTextY );
-
-		this.attachLeftRightArrow();
-		setFocusedRoundNumShift( 0 );
-		attachLockSymbol();
-
-		engine.runOnUpdateThread( new Runnable() {
-
-			@Override
-			public void run( ) {
-				registerTouchArea( mRoundImgBgRect );
-			}
-		} );
-
-	}
-
-	private void setRoundString( int pRoundNum, boolean pNewTextEffect ) {
-		String roundtextstr = "";
-
-		if ( mFocusedRound == 0 ) {//default
-			roundtextstr = String.valueOf( pRoundNum + 1 );
-
-		} else {
-			//get file name of round with index;
-		}
-		mTextRoundNum.setText( String.valueOf( roundtextstr ) );
-
-		final float pXRoundNum = hsMath.getAlignCenterFloat( mTextRoundNum.getWidth(), camera.getWidth() );
-		mTextRoundNum.setPosition( pXRoundNum, mTextRoundNum.getY() );
-
-		if ( pNewTextEffect == true ) {
-			mTextRoundNum.registerEntityModifier( new ScaleModifier( 0.2f, 0.05f, 1f ) );
-		}
-	}
-	
-	private void attachSoundOnOffButton(){
-		//Read sound On/Off state configuration from SharedPreference Before creating Sound OnOff toggle button.
+		attachChild( mSpriteSoundOnOff );
+		registerTouchArea( mSpriteSoundOnOff );
 	}
 
 	private void attachTitileText( ) {
@@ -377,103 +315,122 @@ public class SceneHome extends BaseScene {
 				activity.getString( R.string.company_name ), vbom );
 		pText.setPosition( appComm.getAlignCenterFloat( pText.getWidth(), camera.getWidth() ), pY );
 		attachChild( pText );
-		pText.setColor( appColor.FONT_DEFAULT );
+		pText.setColor( appColor.COMPANY_TEXT_HOMESCENE );
 		pText
-				.registerEntityModifier( new ScaleModifier( 2.5f, 0.1f, 1f, 1f, 1f, EaseBackOut.getInstance() ) );
+				.registerEntityModifier( new ScaleModifier( 2.5f, 0.1f, 0.8f, 1f, 0.8f, EaseBackOut
+						.getInstance() ) );
 	}
 
-	private void attachMarketShareStarAnimatedSprites( ) {
-		final float pY = resourcesManager.applyResizeFactor( 1285f );
-		float[] pX = appComm.getDistributedCenterOrgPosition(
-				resourcesManager.regionMarketShareStar.getWidth(), 3,
-				resourcesManager.applyResizeFactor( 640f ),
-				( camera.getWidth() - resourcesManager.applyResizeFactor( 640f ) ) / 2f );
+	private void attachLevelText( ) {
+		final float buttonWidth = mRoundBtnArray.get( 0 ).getWidth();
+		final float refY = mRoundBtnArray.get( 0 ).getY() - resourcesManager.applyResizeFactor( 15f );
+		float pTextX, pTextY;
+		int pTextIndex = 1;
 
-		AnimatedSprite aSpriteMarket = new GoMarketSharStarAnimatedSprite( pX[0], pY,
-				resourcesManager.regionMarketShareStar, vbom ).activityOn( activity ).goType(
-				Gotype.GO_MARKET );
-
-		aSpriteMarket.animate( new long[] { 500, 500 }, 0, 1, true );
-
-		AnimatedSprite aSpriteShare = new GoMarketSharStarAnimatedSprite( pX[1], pY,
-				resourcesManager.regionMarketShareStar, vbom )
-				.activityOn( activity )
-				.goType( Gotype.GO_SHARE )
-				.shareInformation( activity.getResources().getString( R.string.share_subject ),
-						activity.getString( R.string.share_text ), activity.getString( R.string.app_id ) );
-
-		aSpriteShare.animate( new long[] { 500, 500 }, 2, 3, true );
-
-		AnimatedSprite aSpriteStar = new GoMarketSharStarAnimatedSprite( pX[2], pY,
-				resourcesManager.regionMarketShareStar, vbom ).activityOn( activity ).goType( Gotype.GO_STAR )
-				.appId( activity.getString( R.string.app_id ) );
-
-		aSpriteStar.animate( new long[] { 500, 500 }, 4, 5, true );
-
-		attachChild( aSpriteMarket );
-		registerTouchArea( aSpriteMarket );
-		attachChild( aSpriteStar );
-		registerTouchArea( aSpriteStar );
-		attachChild( aSpriteShare );
-		registerTouchArea( aSpriteShare );
-
-		aSpriteMarket.registerEntityModifier( new ScaleModifier( 0.5f, 0f, 1f ) );
-		aSpriteStar.registerEntityModifier( new ScaleModifier( 0.5f, 0f, 1f ) );
-		aSpriteShare.registerEntityModifier( new ScaleModifier( 0.5f, 0f, 1f ) );
-	}
-
-	private void attachPlayButtonSprite( ) {
-		final float pXHalo = hsMath.getAlignCenterFloat( resourcesManager.regionCicle225.getWidth(),
-				camera.getWidth() );
-		final float pYHalo = resourcesManager.applyResizeFactor( 262f );
-
-		final float pXPlayCircle = hsMath.getAlignCenterFloat( resourcesManager.regionCicle80.getWidth(),
-				camera.getWidth() );
-		final float pYPlayCircle = hsMath.getAlignCenterFloat( resourcesManager.regionCicle80.getHeight(),
-				resourcesManager.regionCicle225.getHeight() ) + pYHalo;
-		Sprite pHalo = new Sprite( pXHalo, pYHalo, resourcesManager.regionCicle225, vbom );
-		pHalo.setAlpha( 0.5f );
-
-		pHalo.registerEntityModifier( new LoopEntityModifier( new SequenceEntityModifier(
-				new ScaleModifier( 0.8f, 1f, 0.2f, EaseCircularIn.getInstance() ),
-				new ScaleModifier( 1f, 0.2f, 1f, EaseCircularIn.getInstance() )
-				) ) );
-
-		attachChild( pHalo );
-
-		Sprite pPlayCircle = new Sprite( pXPlayCircle, pYPlayCircle, resourcesManager.regionCicle80, vbom ) {
-
-			@Override
-			public boolean onAreaTouched( TouchEvent pSceneTouchEvent, float pTouchAreaLocalX,
-					float pTouchAreaLocalY ) {
-				if ( pSceneTouchEvent.isActionDown() ) {
-					this.setScale( 1.5f );
-				} else {
-					this.setScale( 1f );
-					if ( pSceneTouchEvent.isActionUp() ) {
-						onPlayButtonClick();
-					}
-				}
-				return super.onAreaTouched( pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY );
+		final ArrayList<Text> mTextArray = new ArrayList<Text>() {
+			{
+				add( new Text( 0, 0, resourcesManager.getFontButtonSmall(), "L", vbom ) );
+				add( new Text( 0, 0, resourcesManager.getFontButtonSmall(), "E", vbom ) );
+				add( new Text( 0, 0, resourcesManager.getFontButtonSmall(), "V", vbom ) );
+				add( new Text( 0, 0, resourcesManager.getFontButtonSmall(), "E", vbom ) );
+				add( new Text( 0, 0, resourcesManager.getFontButtonSmall(), "L", vbom ) );
 			}
-
 		};
-		pPlayCircle.setColor( appColor.BALL );
-		Sprite pTriangle = new Sprite(
-				resourcesManager.applyResizeFactor( 27.5f ),
-				hsMath.getAlignCenterFloat(
-						resourcesManager.regionTriangle.getHeight(), pPlayCircle.getHeight() ),
-				resourcesManager.regionTriangle, vbom );
-		pTriangle.setColor( appColor.getShuffledPlayButtonColor() );
 
-		pPlayCircle.attachChild( pTriangle );
-		attachChild( pPlayCircle );
-		registerTouchArea( pPlayCircle );
+		Sprite spriteIconList = new Sprite( 0, 0, resourcesManager.regionIconList, vbom );
+		spriteIconList.setPosition( hsMath.getAlignCenterFloat( spriteIconList.getWidth(), buttonWidth
+				+ mRoundBtnArray.get( 0 ).getX() ), refY - spriteIconList.getHeight() );
+		attachChild( spriteIconList );
 
+		for ( Text pText : mTextArray ) {
+			pTextX = hsMath.getAlignCenterFloat( pText.getWidth(), buttonWidth )
+					+ mRoundBtnArray.get( pTextIndex++ ).getX();
+			pTextY = refY - pText.getHeight();
+			pText.setPosition( pTextX, pTextY );
+			pText.setColor( appColor.GRAY_127 );
+			attachChild( pText );
+		}
 	}
 
-	private void onPlayButtonClick( ) {
-		sceneManager.createSceneGame();
+	private void attachMarketShareStarButtons( ) {
+		RectangleLevelButton lastRoundBtn = this.mRoundBtnArray.get( this.mRoundBtnArray.size() - 1 );
+		final float pY = lastRoundBtn.getY() + lastRoundBtn.getHeight() + this.BUTTON_GAP * 2
+				+ this.BUTTON_HEIGHT;
+		final float[] pX = {
+				mRoundBtnArray.get( 0 ).getX(),
+				mRoundBtnArray.get( 2 ).getX(),
+				mRoundBtnArray.get( 4 ).getX() };
+		final float pButtonWidth = pX[1] - pX[0] - this.BUTTON_GAP;
+
+		RectangleButton pMarketButton = new RectangleButton( pX[0], pY, pButtonWidth, this.BUTTON_HEIGHT,
+				vbom, resourcesManager.getFontButtonSmall(),
+				"more" ) {
+			@Override
+			public void onButtonClick( ) {
+				try {
+					activity.startActivity(
+							new Intent( Intent.ACTION_VIEW,
+									Uri.parse( "market://search/?q=pub:Dalcoms" ) ) );
+				} catch ( android.content.ActivityNotFoundException e ) {
+					activity.startActivity(
+							new Intent( Intent.ACTION_VIEW,
+									Uri.parse( "https://play.google.com/store/search?q=dalcoms" ) ) );
+				}
+			}
+		};
+		pMarketButton.setColor( appColor.WHITE );
+		pMarketButton.setTextColor( new Color( 87f / 255f, 87f / 255f, 87f / 255f ) );
+		pMarketButton.attachChild( new Sprite( 0, 0, resourcesManager.regionIconMarket, vbom ) );
+		attachChild( pMarketButton );
+		registerTouchArea( pMarketButton );
+
+		RectangleButton pShareButton = new RectangleButton( pX[1], pY, pButtonWidth, this.BUTTON_HEIGHT,
+				vbom, resourcesManager.getFontButtonSmall(),
+				"share" ) {
+			@Override
+			public void onButtonClick( ) {
+				try {
+					Intent sendIntent = new Intent();
+					sendIntent.setAction( Intent.ACTION_SEND );
+					sendIntent.putExtra( Intent.EXTRA_SUBJECT, activity.getString( R.string.share_subject ) );
+					sendIntent.putExtra( Intent.EXTRA_TEXT, activity.getString( R.string.share_text ) );
+					sendIntent.setType( "text/plain" );
+					activity.startActivity( Intent.createChooser( sendIntent, "Sharing" ) );
+				} catch ( android.content.ActivityNotFoundException e ) {
+					activity.startActivity(
+							new Intent( Intent.ACTION_VIEW, Uri
+									.parse( "http://play.google.com/store/apps/details?id"
+											+ activity.getString( R.string.app_id ) ) ) );
+				}
+			}
+		};
+		pShareButton.setColor( appColor.WHITE );
+		pShareButton.setTextColor( new Color( 87f / 255f, 87f / 255f, 87f / 255f ) );
+		pShareButton.attachChild( new Sprite( 0, 0, resourcesManager.regionIconShare, vbom ) );
+		attachChild( pShareButton );
+		registerTouchArea( pShareButton );
+
+		RectangleButton pStarButton = new RectangleButton( pX[2], pY, pButtonWidth, this.BUTTON_HEIGHT,
+				vbom, resourcesManager.getFontButtonSmall(),
+				"star" ) {
+			@Override
+			public void onButtonClick( ) {
+				try {
+					activity.startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id="
+							+ activity.getString( R.string.app_id ) ) ) );
+
+				} catch ( android.content.ActivityNotFoundException e ) {
+					activity.startActivity( new Intent( Intent.ACTION_VIEW, Uri
+							.parse( "http://play.google.com/store/apps/details?id="
+									+ activity.getString( R.string.app_id ) ) ) );
+				}
+			}
+		};
+		pStarButton.setColor( appColor.WHITE );
+		pStarButton.setTextColor( new Color( 87f / 255f, 87f / 255f, 87f / 255f ) );
+		pStarButton.attachChild( new Sprite( 0, 0, resourcesManager.regionIconStar, vbom ) );
+		attachChild( pStarButton );
+		registerTouchArea( pStarButton );
 	}
 
 	@Override
@@ -529,28 +486,183 @@ public class SceneHome extends BaseScene {
 
 	}
 
-	@SuppressLint( "NewApi" )
-	private void prepareNotificationTest( ) {// Test 1'st
+	private class RoundPageInfo {
+		private int roundDpX;
+		private int roundDpY;
+		private int totalRoundNum;
 
-		NotificationCompat.Builder mNotiBuilder = ( Builder ) new NotificationCompat.Builder( this.activity )
-				.setSmallIcon( R.drawable.ic_launcher )
-				.setContentTitle( this.activity.getText( R.string.app_name ) )
-				.setContentText( "Upgrade your Level." ).setAutoCancel( true );
+		protected ArrayList<RoundPage> mRoundPageArray;
 
-		NotificationManager notificationManager = ( NotificationManager ) this.activity
-				.getSystemService( Context.NOTIFICATION_SERVICE );
+		public RoundPageInfo( ) {
+		}
 
-		Intent intent = new Intent( Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE, Uri.parse( this.getClass()
-				.getPackage().getName() ) );
+		public RoundPageInfo( int pRoundDpX, int pRoundDpY, int pTotalRoundNum ) {
+			setRoundPageInfo( pRoundDpX, pRoundDpY, pTotalRoundNum );
+		}
 
-		TaskStackBuilder stackBuilder = TaskStackBuilder.create( this.activity );
-		PendingIntent resulPendingIntent = PendingIntent.getActivity( this.activity, 0, intent,
-				Intent.FLAG_ACTIVITY_NEW_TASK );
+		public RoundPageInfo setRoundPageInfo( int pRoundDpX, int pRoundDpY, int pTotalRoundNum ) {
+			this.setRoundDpX( pRoundDpX );
+			this.setRoundDpY( pRoundDpY );
+			this.setTotalRoundNum( pTotalRoundNum );
 
-		mNotiBuilder.setContentIntent( resulPendingIntent );
+			this.calcRoundPage();
 
-		notificationManager.notify( ( int ) System.currentTimeMillis(), mNotiBuilder.build() );
+			return this;
+		}
 
+		public int getPageNum( int pRoundNum ) {
+			int ret = -1;
+			for ( RoundPage roundPage : mRoundPageArray ) {
+				if ( ( pRoundNum >= roundPage.getFirstRound() ) && ( pRoundNum <= roundPage.getLastRound() ) ) {
+					ret = roundPage.getPageNum();
+					break;
+				}
+			}
+			return ret;
+		}
+
+		public RoundPage getRoundPage( int pRoundNum ) {
+			return mRoundPageArray.get( getPageNum( pRoundNum ) );
+		}
+
+		private void calcRoundPage( ) {
+			final int roundDpX = this.getRoundDpX();
+			final int roundDpY = this.getRoundDpY();
+			final int roundDpSize = roundDpX * roundDpY;
+			final int totalRoundNum = this.getTotalRoundNum();
+			int pageNum = 0;
+
+			boolean hasPrePage, hasNextPage;
+			int firstRoundNum;
+			int lastRoundNum = 0;
+
+			mRoundPageArray = new ArrayList<SceneHome.RoundPage>();
+
+			do {
+				hasPrePage = pageNum == 0 ? false : true;
+				firstRoundNum = lastRoundNum + 1;
+				lastRoundNum += ( pageNum == 0 ? roundDpSize - 1 : roundDpSize - 2 );
+
+				if ( lastRoundNum <= totalRoundNum ) {
+					hasNextPage = true;
+
+				} else {
+					hasNextPage = false;
+					lastRoundNum = totalRoundNum;
+				}
+
+				Log.v( "roundInfo",
+						"pageNum:" + String.valueOf( pageNum ) +
+								"\nprepage:" + String.valueOf( hasPrePage ) +
+								"\nnextPage:" + String.valueOf( hasNextPage ) +
+								"\n1st:" + String.valueOf( firstRoundNum ) +
+								"\nlast:" + String.valueOf( lastRoundNum ) );
+
+				this.mRoundPageArray
+						.add( new RoundPage( pageNum, hasPrePage, hasNextPage, firstRoundNum, lastRoundNum ) );
+
+				pageNum++;
+			} while ( hasNextPage );
+
+		}
+
+		public int getRoundPageCount( ) {
+			return mRoundBtnArray == null ? 0 : mRoundBtnArray.size();
+		}
+
+		public int getRoundDpX( ) {
+			return roundDpX;
+		}
+
+		public void setRoundDpX( int roundDpX ) {
+			this.roundDpX = roundDpX;
+		}
+
+		public int getRoundDpY( ) {
+			return roundDpY;
+		}
+
+		public void setRoundDpY( int roundDpY ) {
+			this.roundDpY = roundDpY;
+		}
+
+		public int getTotalRoundNum( ) {
+			return totalRoundNum;
+		}
+
+		public void setTotalRoundNum( int totalRoundNum ) {
+			this.totalRoundNum = totalRoundNum;
+		}
+
+	}
+
+	private class RoundPage {
+		private int pageNum;
+		private boolean hasPrePage;
+		private boolean hasNextPage;
+		private int firstRound;
+		private int lastRound;
+
+		public RoundPage( ) {
+			this( -1, false, false, 0, 0 );
+		}
+
+		public RoundPage( int pPageNum, boolean pHasPrePage, boolean pHasNextPage, int pFirstRound,
+				int pLastRound ) {
+			setRoundInfo( pPageNum, pHasPrePage, pHasNextPage, pFirstRound, pLastRound );
+		}
+
+		public RoundPage setRoundInfo( int pPageNum, boolean pHasPrePage, boolean pHasNextPage,
+				int pFirstRound,
+				int pLastRound ) {
+			this.setPageNum( pPageNum );
+			this.setHasPrePage( pHasPrePage );
+			this.setHasNextPage( pHasNextPage );
+			this.setFirstRound( pFirstRound );
+			this.setLastRound( pLastRound );
+
+			return this;
+		}
+
+		public boolean isHasPrePage( ) {
+			return hasPrePage;
+		}
+
+		public void setHasPrePage( boolean hasPrePage ) {
+			this.hasPrePage = hasPrePage;
+		}
+
+		public int getLastRound( ) {
+			return lastRound;
+		}
+
+		public void setLastRound( int lastRound ) {
+			this.lastRound = lastRound;
+		}
+
+		public int getFirstRound( ) {
+			return firstRound;
+		}
+
+		public void setFirstRound( int firstRound ) {
+			this.firstRound = firstRound;
+		}
+
+		public boolean isHasNextPage( ) {
+			return hasNextPage;
+		}
+
+		public void setHasNextPage( boolean hasNextPage ) {
+			this.hasNextPage = hasNextPage;
+		}
+
+		public int getPageNum( ) {
+			return pageNum;
+		}
+
+		public void setPageNum( int pPageNum ) {
+			this.pageNum = pPageNum;
+		}
 	}
 
 }
